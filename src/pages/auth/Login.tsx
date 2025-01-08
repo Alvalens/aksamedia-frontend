@@ -14,7 +14,7 @@ export default function Login() {
             style={{ aspectRatio: "1920/1080", objectFit: "cover" }}
           />
         </div>
-        <div className="flex items-center justify-center p-6 lg:p-10">
+        <div className="flex items-center justify-center p-6 lg:p-10 dark:bg-gray-700 dark:text-white">
           <div className="mx-auto w-full max-w-[400px] space-y-6">
             <div className="space-y-2 text-center">
               <h1 className="text-3xl font-bold">Welcome back!</h1>

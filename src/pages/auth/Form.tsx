@@ -28,7 +28,7 @@ export default function Form() {
           <input
             type="text"
             id="username"
-            className="w-full border rounded px-4 py-2 dark:bg-gray-700 dark:text-gray-200"
+            className="w-full border rounded px-4 py-2 dark:bg-gray-800 dark:text-gray-200"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -38,7 +38,7 @@ export default function Form() {
           <input
             type="password"
             id="password"
-            className="w-full border rounded px-4 py-2 dark:bg-gray-700 dark:text-gray-200"
+            className="w-full border rounded px-4 py-2 dark:bg-gray-800 dark:text-gray-200"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
