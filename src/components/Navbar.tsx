@@ -1,19 +1,23 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import Dropdown from './Dropdown';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
 
   return (
-    <nav className="bg-gray-800 p-4 text-white flex justify-between items-center">
-      <Link to="/dashboard" className="text-lg font-bold">My App</Link>
+    <nav className="bg-gray-100 p-4 text-white flex justify-between items-center">
+      <div>
+      </div>
       {user && (
-        <div className="relative">
-          <button className="bg-gray-700 px-4 py-2 rounded" onClick={logout}>
-            Logout
-          </button>
-        </div>
+        <Dropdown
+          buttonLabel={user}
+          items={[
+            { label: 'Profile', link: '/profile' },
+            { label: 'Settings', link: '/settings' },
+            { label: 'Logout', action: logout },
+          ]}
+        />
       )}
     </nav>
   );

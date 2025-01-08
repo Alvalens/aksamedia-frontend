@@ -1,3 +1,5 @@
+import Form from "./Form";
+
 export default function Login() {
   return (
     <>
@@ -18,7 +20,7 @@ export default function Login() {
               <h1 className="text-3xl font-bold">Welcome back!</h1>
               <p className="text-gray-500 dark:text-gray-400">Enter your email and password to sign in.</p>
             </div>
-            
+            <Form />
           </div>
         </div>
       </div></>
