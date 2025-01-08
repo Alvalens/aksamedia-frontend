@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Employee } from '../../../types/Employee';
 
 const Index: React.FC = () => {
@@ -20,12 +20,63 @@ const Index: React.FC = () => {
       division: 'HR',
       position: 'Assistant',
     },
-    // Add more dummy employees here
+    {
+      id: '3',
+      image: 'https://via.placeholder.com/150',
+      name: 'Jane Smith',
+      phone: '987-654-3210',
+      division: 'HR',
+      position: 'Assistant',
+    },
+    {
+      id: '4',
+      image: 'https://via.placeholder.com/150',
+      name: 'Jane Smith',
+      phone: '987-654-3210',
+      division: 'HR',
+      position: 'Assistant',
+    },
+    {
+      id: '5',
+      image: 'https://via.placeholder.com/150',
+      name: 'Jane Smith',
+      phone: '987-654-3210',
+      division: 'HR',
+      position: 'Assistant',
+    },
+    {
+      id: '6',
+      image: 'https://via.placeholder.com/150',
+      name: 'Jane Smith',
+      phone: '987-654-3210',
+      division: 'HR',
+      position: 'Assistant',
+    },
+    {
+      id: '7',
+      image: 'https://via.placeholder.com/150',
+      name: 'Jane Smith',
+      phone: '987-654-3210',
+      division: 'HR',
+      position: 'Assistant',
+    },
   ]);
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryPage = parseInt(searchParams.get('page') || '1', 10);
+  const querySearch = searchParams.get('search') || '';
+
+  const [searchTerm, setSearchTerm] = useState(querySearch);
+  const [currentPage, setCurrentPage] = useState(queryPage);
+
   const employeesPerPage = 5;
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (searchTerm) params.set('search', searchTerm);
+    if (currentPage > 1) params.set('page', currentPage.toString());
+    setSearchParams(params);
+  }, [searchTerm, currentPage, setSearchParams]);
 
   const filteredEmployees = useMemo(() => {
     return employees.filter((employee) =>
@@ -129,8 +180,8 @@ const Index: React.FC = () => {
                   <button
                     onClick={() => paginate(i + 1)}
                     className={`px-3 py-2 border ${currentPage === i + 1
-                        ? 'bg-blue-500 text-white'
-                        : 'bg-white text-gray-700'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-white text-gray-700'
                       } border-gray-300`}
                   >
                     {i + 1}
