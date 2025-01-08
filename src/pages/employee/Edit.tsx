@@ -63,7 +63,8 @@ const Edit: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded-md">
+    <div className='max-w-7xl mx-auto p-6 bg-white shadow-sm rounded-md'>
+      <div className="space-y-4">
       <h1 className="text-2xl font-bold mb-4">Edit Employee</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -149,6 +150,7 @@ const Edit: React.FC = () => {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

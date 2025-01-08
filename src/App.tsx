@@ -9,6 +9,7 @@ import AuthProvider from './context/AuthContext';
 import React from 'react';
 import Layout from './components/Layout';
 import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
 
 function InnerApp() {
   return (
@@ -28,6 +29,7 @@ function InnerApp() {
         <Route path="/employees" element={<Index />} />
         <Route path="/employees/create" element={<Create />} />
         <Route path="/employees/:id/edit" element={<Edit />} />
+        <Route path="/profile" element={<Profile />} />
 
       </Route>
 
