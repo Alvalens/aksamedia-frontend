@@ -1,7 +1,7 @@
 export default function Dashboard() {
   return (
     <>
-      <div className=" bg-gray-100 dark:bg-gray-900">
+      <div className="">
         <main className="p-6">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
             Welcome to the Dashboard!

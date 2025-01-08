@@ -99,16 +99,16 @@ const Index: React.FC = () => {
   };
 
   return (
-    <div className='max-w-7xl mx-auto p-4 bg-white shadow-sm rounded-md'>
-      <h1 className="text-2xl font-bold mb-4">Employee List</h1>
+    <div className="max-w-7xl mx-auto p-4 bg-white dark:bg-gray-600 shadow-sm rounded-md overflow-hidden">
+      <h1 className="text-2xl font-bold mb-4 dark:text-white">Employee List</h1>
       <div className="flex justify-between items-center mb-4">
         <Link to="create" className="bg-blue-500 text-white py-2 px-4 rounded">
-          Add New Employee
+          Create
         </Link>
         <input
           type="text"
           placeholder="Search..."
-          className="border border-gray-300 rounded px-3 py-2"
+          className="border border-gray-300 rounded px-3 py-2 bg-gray-100 dark:bg-gray-700"
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
@@ -116,60 +116,64 @@ const Index: React.FC = () => {
           }}
         />
       </div>
-      <table className="min-w-full">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="px-4 py-2 text-left">#</th>
-            <th className="px-4 py-2 text-left">Image</th>
-            <th className="px-4 py-2 text-left">Name</th>
-            <th className="px-4 py-2 text-left">Phone</th>
-            <th className="px-4 py-2 text-left">Division</th>
-            <th className="px-4 py-2 text-left">Position</th>
-            <th className="px-4 py-2 text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentEmployees.map((employee, index) => (
-            <tr key={employee.id} className="hover:bg-gray-50">
-              <td className="px-4 py-2">{indexOfFirst + index + 1}</td>
-              <td className="px-4 py-2">
-                <img
-                  src={employee.image}
-                  alt={employee.name}
-                  className="w-12 h-12 rounded-full"
-                />
-              </td>
-              <td className="px-4 py-2">{employee.name}</td>
-              <td className="px-4 py-2">{employee.phone}</td>
-              <td className="px-4 py-2">{employee.division}</td>
-              <td className="px-4 py-2">{employee.position}</td>
-              <td className="px-4 py-2">
-                <div className="flex gap-2">
-                  <Link
-                    to={`${employee.id}/edit`}
-                    className="bg-yellow-500 text-white py-1 px-3 rounded"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    onClick={() => deleteEmployee(employee.id)}
-                    className="bg-red-500 text-white py-1 px-3 rounded"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-          {currentEmployees.length === 0 && (
-            <tr>
-              <td colSpan={7} className="text-center py-4">
-                No employees found.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <div className="overflow-x-auto w-full">
+        <div className='inline-block min-w-full '>
+          <table className="min-w-full dark:text-white">
+            <thead>
+              <tr className="bg-gray-100 dark:bg-gray-700 dark:text-white">
+                <th className="px-4 py-2 text-left">#</th>
+                <th className="px-4 py-2 text-left">Image</th>
+                <th className="px-4 py-2 text-left">Name</th>
+                <th className="px-4 py-2 text-left">Phone</th>
+                <th className="px-4 py-2 text-left">Division</th>
+                <th className="px-4 py-2 text-left">Position</th>
+                <th className="px-4 py-2 text-left">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentEmployees.map((employee, index) => (
+                <tr key={employee.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <td className="whitespace-nowrap  px-4 py-2">{indexOfFirst + index + 1}</td>
+                  <td className="whitespace-nowrap px-4 py-2">
+                    <img
+                      src={employee.image}
+                      alt={employee.name}
+                      className="w-12 h-12 rounded-full"
+                    />
+                  </td>
+                  <td className="whitespace-nowrap  px-4 py-2">{employee.name}</td>
+                  <td className="whitespace-nowrap  px-4 py-2">{employee.phone}</td>
+                  <td className="whitespace-nowrap  px-4 py-2">{employee.division}</td>
+                  <td className="whitespace-nowrap px-4 py-2">{employee.position}</td>
+                  <td className="whitespace-nowrap  px-4 py-2">
+                    <div className="flex gap-2">
+                      <Link
+                        to={`${employee.id}/edit`}
+                        className="bg-yellow-500 text-white py-1 px-3 rounded"
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={() => deleteEmployee(employee.id)}
+                        className="bg-red-500 text-white py-1 px-3 rounded"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              {currentEmployees.length === 0 && (
+                <tr>
+                  <td colSpan={7} className="text-center py-4">
+                    No employees found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+        </div>
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center mt-4">

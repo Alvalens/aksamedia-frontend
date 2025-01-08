@@ -43,13 +43,13 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <div className='max-w-7xl mx-auto p-6 bg-white shadow-sm rounded-md'>
+    <div className='max-w-7xl mx-auto p-6 bg-white dark:bg-gray-600 dark:text-white shadow-sm rounded-md'>
       <div className="space-y-4">
       <h1 className="text-2xl font-bold mb-4">User Profile</h1>
       {isEditing ? (
         <form>
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="name">
               Name
             </label>
             <input
@@ -58,11 +58,11 @@ const Profile: React.FC = () => {
               name="name"
               value={editedUser.name}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded"
+              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="email">
               Email
             </label>
             <input
@@ -71,11 +71,11 @@ const Profile: React.FC = () => {
               name="email"
               value={editedUser.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded"
+              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="phone">
+            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="phone">
               Phone
             </label>
             <input
@@ -84,11 +84,11 @@ const Profile: React.FC = () => {
               name="phone"
               value={editedUser.phone}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded"
+              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="address">
+            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="address">
               Address
             </label>
             <textarea
@@ -96,12 +96,12 @@ const Profile: React.FC = () => {
               name="address"
               value={editedUser.address}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded"
+              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
               rows={3}
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="position">
+            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="position">
               Position
             </label>
             <input
@@ -110,7 +110,7 @@ const Profile: React.FC = () => {
               name="position"
               value={editedUser.position}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded"
+              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
             />
           </div>
           <div className="flex justify-between">

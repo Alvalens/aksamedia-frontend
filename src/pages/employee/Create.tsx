@@ -42,13 +42,13 @@ const Create: React.FC = () => {
 	};
 
 	return (
-		<div className='max-w-7xl mx-auto p-6 bg-white shadow-sm rounded-md'>
+		<div className='max-w-7xl mx-auto p-6 bg-white dark:bg-gray-600 dark:text-white shadow-sm rounded-md'>
 		<div className="space-y-4">
 			<h1 className="text-2xl font-bold mb-4">Add New Employee</h1>
 			{error && <p className="text-red-500 mb-4">{error}</p>}
 			<form onSubmit={handleSubmit} className="space-y-4">
 				<div>
-					<label htmlFor="image" className="block text-sm font-medium text-gray-700">
+					<label htmlFor="image" className="block text-sm font-medium text-gray-700 dark:text-white">
 						Image URL
 					</label>
 					<input
@@ -57,11 +57,11 @@ const Create: React.FC = () => {
 						name="image"
 						value={formData.image}
 						onChange={handleChange}
-						className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+						className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 					/>
 				</div>
 				<div>
-					<label htmlFor="name" className="block text-sm font-medium text-gray-700">
+					<label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-white">
 						Name
 					</label>
 					<input
@@ -70,12 +70,12 @@ const Create: React.FC = () => {
 						name="name"
 						value={formData.name}
 						onChange={handleChange}
-						className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+						className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 						required
 					/>
 				</div>
 				<div>
-					<label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+					<label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-white">
 						Phone
 					</label>
 					<input
@@ -84,12 +84,12 @@ const Create: React.FC = () => {
 						name="phone"
 						value={formData.phone}
 						onChange={handleChange}
-						className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+						className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 						required
 					/>
 				</div>
 				<div>
-					<label htmlFor="division" className="block text-sm font-medium text-gray-700">
+					<label htmlFor="division" className="block text-sm font-medium text-gray-700 dark:text-white">
 						Division
 					</label>
 					<input
@@ -98,12 +98,12 @@ const Create: React.FC = () => {
 						name="division"
 						value={formData.division}
 						onChange={handleChange}
-						className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+						className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 						required
 					/>
 				</div>
 				<div>
-					<label htmlFor="position" className="block text-sm font-medium text-gray-700">
+					<label htmlFor="position" className="block text-sm font-medium text-gray-700 dark:text-white">
 						Position
 					</label>
 					<input
@@ -112,14 +112,14 @@ const Create: React.FC = () => {
 						name="position"
 						value={formData.position}
 						onChange={handleChange}
-						className="mt-1 block w-full border border-gray-300 rounded px-3 py-2"
+						className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 						required
 					/>
 				</div>
 				<div className="flex justify-end gap-2">
 					<button
 						type="button"
-						onClick={() => navigate('/')}
+						onClick={() => navigate('/employees')}
 						className="bg-gray-500 text-white py-2 px-4 rounded"
 					>
 						Cancel

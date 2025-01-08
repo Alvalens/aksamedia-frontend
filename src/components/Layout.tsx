@@ -9,7 +9,7 @@ const Layout: React.FC = () => {
             <Sidebar />
             <div className="flex-1 flex flex-col">
                 <Navbar />
-                <main className="p-4 flex-1 bg-gray-100">
+                <main className="p-4 flex-1 bg-gray-100 dark:bg-gray-700 ps-20 md:ps-4">
                     <Outlet />
                 </main>
             </div>
