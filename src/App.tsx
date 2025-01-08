@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/auth/Login';
 import Dashboard from './pages/Dashboard';
+import Index from './pages/employee/Index';
+import Create from './pages/employee/Create';
+import Edit from './pages/employee/Edit';
 import PrivateRoute from './utils/PrivateRoute';
 import AuthProvider from './context/AuthContext';
 import React from 'react';
@@ -22,6 +25,10 @@ function InnerApp() {
         }
       >
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/employees" element={<Index />} />
+        <Route path="/employees/create" element={<Create />} />
+        <Route path="/employees/:id/edit" element={<Edit />} />
+
       </Route>
 
       {/* 404 Route */}
