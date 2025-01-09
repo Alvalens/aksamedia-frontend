@@ -1,26 +1,16 @@
-import React, { useState } from 'react';
-
-interface UserProfile {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  position: string;
-}
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const Profile: React.FC = () => {
-  const [user, setUser] = useState<UserProfile>({
-    id: '1',
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    phone: '123-456-7890',
-    address: '123 Main Street, Cityville, Country',
-    position: 'Software Engineer',
-  });
-
+  const { user, logout, updateUser } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState(user);
+
+  useEffect(() => {
+    if (user) {
+      setEditedUser(user);
+    }
+  }, [user]);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -32,130 +22,125 @@ const Profile: React.FC = () => {
   };
 
   const handleSave = () => {
-    setUser(editedUser);
-    setIsEditing(false);
-    console.log('Profile updated:', editedUser);
+    if (editedUser) {
+      updateUser(editedUser);
+      setIsEditing(false);
+      console.log('Profile updated:', editedUser);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setEditedUser({ ...editedUser, [name]: value });
+    if (editedUser) {
+      setEditedUser({ ...editedUser, [name]: value });
+    }
   };
 
   return (
     <div className='max-w-7xl mx-auto p-6 bg-white dark:bg-gray-600 dark:text-white shadow-sm rounded-md'>
       <div className="space-y-4">
-      <h1 className="text-2xl font-bold mb-4">User Profile</h1>
-      {isEditing ? (
-        <form>
-          <div className="mb-4">
-            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="name">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={editedUser.name}
-              onChange={handleChange}
-              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={editedUser.email}
-              onChange={handleChange}
-              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="phone">
-              Phone
-            </label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              value={editedUser.phone}
-              onChange={handleChange}
-              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="address">
-              Address
-            </label>
-            <textarea
-              id="address"
-              name="address"
-              value={editedUser.address}
-              onChange={handleChange}
-              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
-              rows={3}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="position">
-              Position
-            </label>
-            <input
-              type="text"
-              id="position"
-              name="position"
-              value={editedUser.position}
-              onChange={handleChange}
-              className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
-            />
-          </div>
-          <div className="flex justify-between">
+        <h1 className="text-2xl font-bold mb-4">User Profile</h1>
+        {isEditing ? (
+          <form>
+            <div className="mb-4">
+              <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="name">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={editedUser?.name || ''}
+                onChange={handleChange}
+                className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="username">
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={editedUser?.username || ''}
+                onChange={handleChange}
+                className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="email">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={editedUser?.email || ''}
+                onChange={handleChange}
+                className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 dark:text-white font-bold mb-2" htmlFor="phone">
+                Phone
+              </label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                value={editedUser?.phone || ''}
+                onChange={handleChange}
+                className="dark:bg-gray-800 w-full px-3 py-2 border border-gray-300 rounded"
+              />
+            </div>
+
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="bg-gray-500 text-white py-2 px-4 rounded"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleSave}
+                className="bg-blue-500 text-white py-2 px-4 rounded"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div>
+            <div className="mb-4">
+              <strong>Name:</strong> {user?.name}
+            </div>
+            <div className="mb-4">
+              <strong>Username:</strong> {user?.username}
+            </div>
+            <div className="mb-4">
+              <strong>Email:</strong> {user?.email}
+            </div>
+            <div className="mb-4">
+              <strong>Phone:</strong> {user?.phone}
+            </div>
             <button
-              type="button"
-              onClick={handleCancel}
-              className="bg-gray-500 text-white py-2 px-4 rounded"
+              onClick={handleEdit}
+              className="bg-yellow-500 text-white py-2 px-4 rounded"
             >
-              Cancel
+              Edit Profile
             </button>
             <button
-              type="button"
-              onClick={handleSave}
-              className="bg-blue-500 text-white py-2 px-4 rounded"
+              onClick={logout}
+              className="bg-red-500 text-white py-2 px-4 rounded ml-4"
             >
-              Save
+              Logout
             </button>
           </div>
-        </form>
-      ) : (
-        <div>
-          <div className="mb-4">
-            <strong>Name:</strong> {user.name}
-          </div>
-          <div className="mb-4">
-            <strong>Email:</strong> {user.email}
-          </div>
-          <div className="mb-4">
-            <strong>Phone:</strong> {user.phone}
-          </div>
-          <div className="mb-4">
-            <strong>Address:</strong> {user.address}
-          </div>
-          <div className="mb-4">
-            <strong>Position:</strong> {user.position}
-          </div>
-          <button
-            onClick={handleEdit}
-            className="bg-yellow-500 text-white py-2 px-4 rounded"
-          >
-            Edit Profile
-          </button>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
         <ThemeToggler />
         {user && (
           <Dropdown
-            buttonLabel={user}
+            buttonLabel={user.name}
             items={[
               { label: 'Profile', link: '/profile' },
               { label: 'Settings', link: '/settings' },
