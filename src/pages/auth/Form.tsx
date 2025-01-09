@@ -1,18 +1,17 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
-export default function Form() {
+const Form: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = login(username, password);
+    const success = await login(username, password);
     if (success) {
       navigate('/dashboard');
     } else {
@@ -52,5 +51,7 @@ export default function Form() {
       </form>
       {error && <p className="text-red-500 mb-4">{error}</p>}
     </>
-  )
-}
+  );
+};
+
+export default Form;

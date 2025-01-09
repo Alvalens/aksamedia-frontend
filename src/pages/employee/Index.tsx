@@ -84,7 +84,7 @@ const Index: React.FC = () => {
             </thead>
             <tbody>
               {currentEmployees.map((employee, index) => (
-                <tr key={employee.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                <tr key={employee.id} className="dark:text-white">
                   <td className="whitespace-nowrap  px-4 py-2">{indexOfFirst + index + 1}</td>
                   <td className="whitespace-nowrap px-4 py-2">
                     <img

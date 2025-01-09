@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Employee } from '../../../types/Employee';
 
 const Create: React.FC = () => {
-	const [formData, setFormData] = useState<Omit<Employee, 'id'>>({
+	const [employee, setEmployee] = useState<Omit<Employee, 'id'>>({
 		image: '',
 		name: '',
 		phone: '',
@@ -16,7 +16,7 @@ const Create: React.FC = () => {
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
-		setFormData((prev) => ({
+		setEmployee((prev) => ({
 			...prev,
 			[name]: value,
 		}));
@@ -25,24 +25,30 @@ const Create: React.FC = () => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		// Validation
-		if (!formData.name || !formData.phone || !formData.division || !formData.position) {
+		if (!employee.name || !employee.phone || !employee.division || !employee.position) {
 			setError('All fields are required.');
+			return;
+		}
+
+		if (!/^\d{8,12}$/.test(employee.phone)) {
+			setError('Phone number must be 8-12 digits.');
+			return;
+		}
+
+		if (!/^[a-zA-Z ]+$/.test(employee.name)) {
+			setError('Name must be string.');
 			return;
 		}
 
 		const newEmployee: Employee = {
 			id: Math.random().toString(36).substr(2, 9),
-			...formData,
+			...employee,
 		};
 
-		// Get existing employees from local storage
 		const existingEmployees = JSON.parse(localStorage.getItem('employees') || '[]');
 
-		// Add the new employee to the list
 		const updatedEmployees = [...existingEmployees, newEmployee];
 
-		// Save the updated list to local storage
 		localStorage.setItem('employees', JSON.stringify(updatedEmployees));
 
 		console.log('New Employee:', newEmployee);
@@ -64,7 +70,7 @@ const Create: React.FC = () => {
 							type="text"
 							id="image"
 							name="image"
-							value={formData.image}
+							value={employee.image}
 							onChange={handleChange}
 							className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 						/>
@@ -77,7 +83,7 @@ const Create: React.FC = () => {
 							type="text"
 							id="name"
 							name="name"
-							value={formData.name}
+							value={employee.name}
 							onChange={handleChange}
 							className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 							required
@@ -91,7 +97,7 @@ const Create: React.FC = () => {
 							type="text"
 							id="phone"
 							name="phone"
-							value={formData.phone}
+							value={employee.phone}
 							onChange={handleChange}
 							className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 							required
@@ -105,7 +111,7 @@ const Create: React.FC = () => {
 							type="text"
 							id="division"
 							name="division"
-							value={formData.division}
+							value={employee.division}
 							onChange={handleChange}
 							className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 							required
@@ -119,7 +125,7 @@ const Create: React.FC = () => {
 							type="text"
 							id="position"
 							name="position"
-							value={formData.position}
+							value={employee.position}
 							onChange={handleChange}
 							className="mt-1 block dark:bg-gray-700 w-full border border-gray-300 rounded px-3 py-2"
 							required

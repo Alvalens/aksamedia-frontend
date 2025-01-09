@@ -1,4 +1,4 @@
-export default function Dashboard() {
+const Dashboard: React.FC = () => {
   return (
     <>
       <div className="">
@@ -12,5 +12,7 @@ export default function Dashboard() {
         </main>
       </div>
     </>
-  )
-}
+  );
+};
+
+export default Dashboard;

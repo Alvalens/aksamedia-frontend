@@ -35,9 +35,19 @@ const Edit: React.FC = () => {
     e.preventDefault();
 
     if (employee) {
-      // Validation
+
       if (!employee.name || !employee.phone || !employee.division || !employee.position) {
         setError('All fields are required.');
+        return;
+      }
+
+      if (!/^\d{8,12}$/.test(employee.phone)) {
+        setError('Phone number must be 8-12 digits.');
+        return;
+      }
+
+      if (!/^[a-zA-Z ]+$/.test(employee.name)) {
+        setError('Name must be string.');
         return;
       }
 

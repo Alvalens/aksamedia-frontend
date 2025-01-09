@@ -11,42 +11,39 @@ import Layout from './components/Layout';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 
-function InnerApp() {
-  return (
-    <Routes>
-      {/* Public Route */}
-      <Route path="/" element={<LoginPage />} />
+const InnerApp: React.FC = () => (
+  <Routes>
+    {/* Public Route */}
+    <Route path="/" element={<LoginPage />} />
 
-      {/* Private Routes wrapped with Layout */}
-      <Route
-        element={
-          <PrivateRoute>
-            <Layout />
-          </PrivateRoute>
-        }
-      >
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/employees" element={<Index />} />
-        <Route path="/employees/create" element={<Create />} />
-        <Route path="/employees/:id/edit" element={<Edit />} />
-        <Route path="/profile" element={<Profile />} />
+    {/* Private Routes wrapped with Layout */}
+    <Route
+      element={
+        <PrivateRoute>
+          <Layout />
+        </PrivateRoute>
+      }
+    >
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/employees" element={<Index />} />
+      <Route path="/employees/create" element={<Create />} />
+      <Route path="/employees/:id/edit" element={<Edit />} />
+      <Route path="/profile" element={<Profile />} />
+    </Route>
 
-      </Route>
+    {/* 404 Route */}
+    <Route path="*" element={<NotFound />} />
+  </Routes>
+);
 
-      {/* 404 Route */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
-}
+const App: React.FC = () => (
+  <AuthProvider>
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <Router>
+        <InnerApp />
+      </Router>
+    </React.Suspense>
+  </AuthProvider>
+);
 
-export default function App() {
-  return (
-    <AuthProvider>
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <Router>
-          <InnerApp />
-        </Router>
-      </React.Suspense>
-    </AuthProvider>
-  );
-}
+export default App;
