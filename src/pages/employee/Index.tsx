@@ -3,64 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Employee } from '../../../types/Employee';
 
 const Index: React.FC = () => {
-  const [employees, setEmployees] = useState<Employee[]>([
-    {
-      id: '1',
-      image: 'https://via.placeholder.com/150',
-      name: 'John Doe',
-      phone: '123-456-7890',
-      division: 'Sales',
-      position: 'Manager',
-    },
-    {
-      id: '2',
-      image: 'https://via.placeholder.com/150',
-      name: 'Jane Smith',
-      phone: '987-654-3210',
-      division: 'HR',
-      position: 'Assistant',
-    },
-    {
-      id: '3',
-      image: 'https://via.placeholder.com/150',
-      name: 'Jane Smith',
-      phone: '987-654-3210',
-      division: 'HR',
-      position: 'Assistant',
-    },
-    {
-      id: '4',
-      image: 'https://via.placeholder.com/150',
-      name: 'Jane Smith',
-      phone: '987-654-3210',
-      division: 'HR',
-      position: 'Assistant',
-    },
-    {
-      id: '5',
-      image: 'https://via.placeholder.com/150',
-      name: 'Jane Smith',
-      phone: '987-654-3210',
-      division: 'HR',
-      position: 'Assistant',
-    },
-    {
-      id: '6',
-      image: 'https://via.placeholder.com/150',
-      name: 'Jane Smith',
-      phone: '987-654-3210',
-      division: 'HR',
-      position: 'Assistant',
-    },
-    {
-      id: '7',
-      image: 'https://via.placeholder.com/150',
-      name: 'Jane Smith',
-      phone: '987-654-3210',
-      division: 'HR',
-      position: 'Assistant',
-    },
-  ]);
+  const [employees, setEmployees] = useState<Employee[]>([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const queryPage = parseInt(searchParams.get('page') || '1', 10);
@@ -70,6 +13,13 @@ const Index: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(queryPage);
 
   const employeesPerPage = 5;
+
+  useEffect(() => {
+    const storedEmployees = localStorage.getItem('employees');
+    if (storedEmployees) {
+      setEmployees(JSON.parse(storedEmployees));
+    }
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -94,7 +44,9 @@ const Index: React.FC = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const deleteEmployee = (id: string) => {
-    setEmployees(employees.filter((employee) => employee.id !== id));
+    const updatedEmployees = employees.filter((employee) => employee.id !== id);
+    setEmployees(updatedEmployees);
+    localStorage.setItem('employees', JSON.stringify(updatedEmployees));
     console.log(`Employee with ID: ${id} deleted.`);
   };
 
@@ -173,7 +125,7 @@ const Index: React.FC = () => {
             </tbody>
           </table>
         </div>
-        </div>
+      </div>
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center mt-4">
